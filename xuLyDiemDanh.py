@@ -26,13 +26,13 @@ import mysql.connector
 # import ngay gio
 import datetime
 
-# mydb = mysql.connector.connect(
-#     host='localhost',
-#     username='root',
-#     password='',
-#     port='3306',
-#     database='project_barcode'
-# )
+mydb = mysql.connector.connect(
+    host='localhost',
+    username='root',
+    password='',
+    port='3306',
+    database='project_barcode'
+)
 
 class MainWindow:
     def __init__(self):
@@ -41,6 +41,8 @@ class MainWindow:
         self.uic.setupUi(self.main_win)
         self.uic.btn_openCam.clicked.connect(self.openCameraBarCode)
         self.uic.btn_export_file.clicked.connect(self.export_to_excel)
+        self.uic.btn_tim_danhSach.clicked.connect(self.layDanhSachLop)
+        self.uic.btn_luu_danh_sach.clicked.connect(self.luu_danh_sach)
         # Lấy ngày hiện tại
         today = datetime.date.today()
         # Chuyển đổi sang ngày tháng năm
@@ -86,18 +88,35 @@ class MainWindow:
                 break
 
 
+    
     def handle_barcode_scanned(self, barcode_data):
-        # Thêm hàng mới vào bảng
-        row_count = self.uic.bang_danh_sach.rowCount()
-        self.uic.bang_danh_sach.insertRow(row_count)
+        try:
+            # Kiểm tra xem mã vạch có khớp với dữ liệu nào trong cột đầu tiên không
+            found = False
+            for row in range(self.uic.bang_danh_sach.rowCount()):
+                item = self.uic.bang_danh_sach.item(row, 0)  # Giả sử mã vạch ở cột đầu tiên
+                if item is not None and item.text() == barcode_data:
+                    # Cập nhật trạng thái điểm danh (cột thứ hai) để chỉ ra sự có mặt
+                    status_item = QtWidgets.QTableWidgetItem("Có mặt")
+                    self.uic.bang_danh_sach.setItem(row, 1, status_item)
+                    found = True
+                    break
 
-        # Đặt mã số vào cột đầu tiên
-        item = QtWidgets.QTableWidgetItem(barcode_data)
-        self.uic.bang_danh_sach.setItem(row_count, 0, item)
+            if not found:
+                # Nếu mã vạch không khớp với dữ liệu nào, thêm hàng mới vào bảng
+                row_count = self.uic.bang_danh_sach.rowCount()
+                self.uic.bang_danh_sach.insertRow(row_count)
+                # Đặt mã vạch vào cột đầu tiên
+                barcode_item = QtWidgets.QTableWidgetItem(barcode_data)
+                self.uic.bang_danh_sach.setItem(row_count, 0, barcode_item)
+                # Đặt trạng thái mặc định vào cột thứ hai
+                status_item = QtWidgets.QTableWidgetItem("Có mặt")
+                self.uic.bang_danh_sach.setItem(row_count, 1, status_item)
 
-        # Đặt trạng thái điểm danh vào cột thứ hai
-        item = QtWidgets.QTableWidgetItem("Có mặt")  # Hoặc trạng thái khác tùy theo nhu cầu
-        self.uic.bang_danh_sach.setItem(row_count, 1, item)
+        except Exception as e:
+            message = QMessageBox()
+            message.setText(f"Lỗi: {str(e)}")
+            message.exec_()
 
     def update(self):
         self.setPhoto(self.frame_so_0)
@@ -108,6 +127,157 @@ class MainWindow:
         img = QtGui.QImage(image,image.shape[1],image.shape[0], image.strides[0],QtGui.QImage.Format_RGB888)
         self.uic.label_frameBarCode.setPixmap(QtGui.QPixmap.fromImage(img))
        
+    # def layDanhSachLop(self):
+
+    #     # SELECT 
+    #     # diem_danh.mssv, thoi_khoa_bieu.ngay, diem_danh.trang_thai,diem_danh.tuan_hoc 
+    #     # FROM 
+    #     # dang_ky_mon_hoc join diem_danh 
+    #     # on diem_danh.mssv = dang_ky_mon_hoc.mssv 
+    #     # join thoi_khoa_bieu on thoi_khoa_bieu.tuan_hoc = diem_danh.tuan_hoc
+    #     # WHERE dang_ky_mon_hoc.ma_mon = 'ct111' 
+
+    #     try:
+    #         ma_hoc_phan = self.uic.input_ma_mon.text()
+    #         nhom = self.uic.input_nhom.text()
+    #         mycursor = mydb.cursor()
+    #         mycursor.execute("SELECT `ma_so_sinh_vien` FROM `dang_ky_mon_hoc` WHERE ma_mon = %s and nhom = %s", (ma_hoc_phan, nhom))
+            
+    #         myresult = mycursor.fetchall()
+            
+    #         # Làm rỗng bảng trước khi load dữ liệu mới
+    #         self.uic.bang_danh_sach.setRowCount(0)
+            
+    #         if not myresult:
+    #             message = QMessageBox()
+    #             message.setText(f"Không tìm thấy lớp học")
+    #             message.exec_()
+
+    #         for row_number, row_data in enumerate(myresult):
+    #             self.uic.bang_danh_sach.insertRow(row_number)
+                
+    #             # Chỉ lấy cột đầu tiên (mã số sinh viên)
+    #             data = row_data[0]
+                
+    #             self.uic.bang_danh_sach.setItem(row_number, 0, QtWidgets.QTableWidgetItem(str(data)))
+    #     except Exception as e:
+    #         message = QMessageBox()
+    #         message.setText(f"Lỗi")
+    #         message.exec_()
+
+    
+    def layDanhSachLop(self):
+        try:
+            ma_hoc_phan = self.uic.input_ma_mon.text()
+            nhom = self.uic.input_nhom.text()
+            mycursor = mydb.cursor()
+
+            # Thực hiện truy vấn SQL
+            mycursor.execute("""
+                SELECT diem_danh.mssv, diem_danh.trang_thai, diem_danh.tuan_hoc
+                FROM dang_ky_mon_hoc 
+                JOIN diem_danh ON diem_danh.mssv = dang_ky_mon_hoc.mssv 
+                WHERE diem_danh.ma_hoc_phan = %s and diem_danh.nhom = %s
+            """, (ma_hoc_phan, nhom))
+
+            myresult = mycursor.fetchall()
+
+            # Xóa bảng trước khi tải dữ liệu mới
+            self.uic.bang_danh_sach.setRowCount(0)
+
+            if not myresult:
+                message = QtWidgets.QMessageBox()
+                message.setText(f"Không tìm thấy lớp học")
+                message.exec_()
+            else:
+                # Tạo một từ điển để lưu trữ dữ liệu cho mỗi mssv và tuần
+                mssv_data = {}
+
+                for row_number, row_data in enumerate(myresult):
+                    mssv, trang_thai, tuan_hoc = row_data
+
+                    # Kiểm tra xem mssv đã tồn tại trong từ điển chưa
+                    if mssv not in mssv_data:
+                        mssv_data[mssv] = {'tuans': {tuan_hoc: trang_thai}}
+                    else:
+                        mssv_data[mssv]['tuans'][tuan_hoc] = trang_thai
+
+                # Tạo một danh sách các tuần duy nhất và thêm tuần hiện tại vào cuối cùng
+                unique_weeks = sorted(set(tuan for mssv_info in mssv_data.values() for tuan in mssv_info['tuans']))
+                current_week = "tuần hiện tại"
+                unique_weeks.append(current_week)
+
+                # Thêm cột cho mỗi tuần
+                self.uic.bang_danh_sach.setColumnCount(1 + len(unique_weeks))
+
+                # Đặt tiêu đề cho cột đầu tiên
+                self.uic.bang_danh_sach.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem('mssv'))
+
+                # Đặt tiêu đề cho mỗi tuần
+                for col_number, week in enumerate(unique_weeks):
+                    self.uic.bang_danh_sach.setHorizontalHeaderItem(1 + col_number, QtWidgets.QTableWidgetItem(f'{week}'))
+
+                # Thêm dữ liệu vào bảng
+                for row_number, (mssv, mssv_info) in enumerate(mssv_data.items()):
+                    self.uic.bang_danh_sach.insertRow(row_number)
+
+                    # Đặt mssv trong cột đầu tiên
+                    self.uic.bang_danh_sach.setItem(row_number, 0, QtWidgets.QTableWidgetItem(str(mssv)))
+
+                    # Đặt trạng thái điểm danh cho mỗi tuần
+                    for col_number, week in enumerate(unique_weeks):
+                        trang_thai = mssv_info['tuans'].get(week, '')
+                        self.uic.bang_danh_sach.setItem(row_number, 1 + col_number, QtWidgets.QTableWidgetItem(trang_thai))
+
+        except Exception as e:
+            message = QtWidgets.QMessageBox()
+            message.setText(f"Lỗi: {str(e)}")
+            message.exec_()
+
+
+
+    
+    
+
+    def luu_danh_sach(self):
+        try:
+            ma_hoc_phan = self.uic.input_ma_mon.text()
+            nhom = self.uic.input_nhom.text()
+            ngay = self.uic.input_ngay.text()
+            tuan = self.uic.input_tuan.text()
+            mycursor = mydb.cursor()
+
+            # Lặp qua từng dòng trong bảng để lưu dữ liệu vào CSDL
+            for row in range(self.uic.bang_danh_sach.rowCount()):
+                mssv_item = self.uic.bang_danh_sach.item(row, 0)  # Cột mã số sinh viên
+                trang_thai_item = self.uic.bang_danh_sach.item(row, 1)  # Cột trạng thái điểm danh
+
+
+                # if mssv_item is not None and trang_thai_item is not None:
+                mssv = mssv_item.text()
+                trang_thai = trang_thai_item.text()
+                # print(mssv, ma_hoc_phan, nhom, tuan, trang_thai)
+                sql_diem_danh = "INSERT INTO `diem_danh`(`id`, `mssv`, `ma_hoc_phan`, `nhom`, `tuan_hoc`, `trang_thai`)  VALUES ('', %s, %s, %s, %s, %s)"
+                val_diem_danh = (mssv, ma_hoc_phan, nhom, tuan, trang_thai)
+                mycursor.execute(sql_diem_danh, val_diem_danh)
+
+                sql_tkb = "INSERT INTO `thoi_khoa_bieu`(`id`, `tuan_hoc`, `ngay`) VALUES ('',%s,%s)"
+                val_tkb = (tuan,ngay)
+                mycursor.execute(sql_tkb, val_tkb)
+            mydb.commit()
+            # Thông báo thành công
+            if mssv_item is not None and trang_thai_item is not None:
+                success_message = QMessageBox()
+                success_message.setText("Lưu điểm danh thành công")
+                success_message.exec_()
+
+        except Exception:
+            # Thông báo lỗi nếu có
+            error_message = QMessageBox()
+            error_message.setText(f"Chưa điểm danh !")
+            error_message.exec_()       
+
+
         
     def export_to_excel(self):
         # lay du lieu tu input
@@ -115,29 +285,30 @@ class MainWindow:
         ma_mon = self.uic.input_ma_mon.text()
         nhom = self.uic.input_nhom.text()
         ngay = self.uic.input_ngay.text()
-        # self.uic
+
+        # Workbook and active sheet
         workbook = openpyxl.Workbook()
         sheet = workbook.active
 
-        # Đặt tiêu đề cột
-        sheet['A1'] = 'Mã số sinh viên'
-        sheet['B1'] = 'Trạng thái'
-        sheet['C1'] = 'Giảng viên'
-        sheet['D1'] = 'Mã môn'
-        sheet['E1'] = 'Nhóm'
-        sheet['F1'] = 'Ngày'
+        # Set headers
+        headers = ['Giảng viên', 'Mã môn','Nhóm']
+        for col_num, header in enumerate(headers, start=1):
+            sheet.cell(row=1, column=col_num).value = header
 
-        sheet['C2'].value = hoten_GV
-        sheet['D2'].value = ma_mon
-        sheet['E2'].value = nhom
-        sheet['F2'].value = ngay
+        # Set values
+        values = [hoten_GV, ma_mon, nhom]
+        for col_num, value in enumerate(values, start=1):
+            sheet.cell(row=2, column=col_num).value = value
+
         # Lấy dữ liệu từ bảng và ghi vào file Excel
         row_count = self.uic.bang_danh_sach.rowCount()
-        for row in range(1, row_count + 1):
-            for col in range(3):  # 3 cột trong bảng
-                item = self.uic.bang_danh_sach.item(row - 1, col)
+        start_row_excel = 5  # Adjust the starting row as needed
+
+        for row in range(start_row_excel, start_row_excel + row_count):
+            for col in range(1, 4):  # 3 cột trong bảng
+                item = self.uic.bang_danh_sach.item(row - start_row_excel, col - 1)
                 if item is not None:
-                    sheet.cell(row=row + 1, column=col + 1).value = item.text()
+                    sheet.cell(row=row, column=col).value = item.text()
 
         # Lưu file Excel
         file_name = 'danh_sach_diem_danh.xlsx'  # Tên file tùy chỉnh

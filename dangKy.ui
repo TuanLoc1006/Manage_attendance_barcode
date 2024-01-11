@@ -95,10 +95,10 @@
        <widget class="QWidget" name="formLayoutWidget">
         <property name="geometry">
          <rect>
-          <x>880</x>
+          <x>630</x>
           <y>20</y>
           <width>471</width>
-          <height>251</height>
+          <height>181</height>
          </rect>
         </property>
         <layout class="QFormLayout" name="formLayout">
@@ -131,7 +131,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Mã số </string>
+            <string>Mã số sinh viên</string>
            </property>
           </widget>
          </item>
@@ -225,48 +225,6 @@
            </item>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_maMon">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Mã môn</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="input_maMon">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_nhom">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Nhóm</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="1">
-          <widget class="QLineEdit" name="input_nhom">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
         </layout>
        </widget>
        <widget class="QLabel" name="label_user">
@@ -303,9 +261,9 @@
        <widget class="QPushButton" name="btn_luuThongTin">
         <property name="geometry">
          <rect>
-          <x>1190</x>
-          <y>330</y>
-          <width>161</width>
+          <x>1150</x>
+          <y>20</y>
+          <width>191</width>
           <height>51</height>
          </rect>
         </property>
@@ -315,15 +273,15 @@
          </font>
         </property>
         <property name="text">
-         <string>Lưu thông tin</string>
+         <string>Đăng ký sinh viên</string>
         </property>
        </widget>
        <widget class="QPushButton" name="btn_clear_input">
         <property name="geometry">
          <rect>
-          <x>1190</x>
-          <y>400</y>
-          <width>161</width>
+          <x>1150</x>
+          <y>80</y>
+          <width>191</width>
           <height>51</height>
          </rect>
         </property>
@@ -356,6 +314,117 @@
         </property>
         <property name="text">
          <string>Mã vạch</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>340</y>
+          <width>401</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>Đăng ký học phần</string>
+        </property>
+        <widget class="QWidget" name="formLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>361</width>
+           <height>121</height>
+          </rect>
+         </property>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="mSSinhViNLabel">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Mã số sinh viên</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="input_mssv_dkhp">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="mHCPhNLabel">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Mã học phần</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="input_ma_hocPhan">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="nhMLabel">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nhóm</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="input_nhom_hocPhan">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="btn_dangKyHocPhan">
+        <property name="geometry">
+         <rect>
+          <x>1160</x>
+          <y>370</y>
+          <width>181</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Đăng ký học phần</string>
         </property>
        </widget>
       </widget>

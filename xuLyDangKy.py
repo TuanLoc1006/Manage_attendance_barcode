@@ -29,6 +29,8 @@ class MainWindow:
         self.uic.btn_imgUser.clicked.connect(self.linkToUser)
         self.uic.btn_luuThongTin.clicked.connect(self.createBarcode)
         self.uic.btn_clear_input.clicked.connect(self.clear_input)
+
+        self.uic.btn_dangKyHocPhan.clicked.connect(self.dangKyHocPhan)
         # self.uic.btn_luuThongTin.clicked.connect(self.check_information)
     def linkToUser(self):
         global link_name_user_pic
@@ -38,7 +40,7 @@ class MainWindow:
         self.uic.label_user.setPixmap(QPixmap(link_name_user_pic[0]))
 
     def createBarcode(self):
-        if self.check_information() == 6:
+        if self.check_information() == 4:
             createQR = 1
             name = self.uic.input_hoTen.text()
             maSo = self.uic.input_maSo.text()
@@ -46,8 +48,8 @@ class MainWindow:
             email = self.uic.input_email.text()
             gioiTinh =  self.uic.input_gioiTinh.currentText()
         
-            maMon = self.uic.input_maMon.text()
-            nhom = self.uic.input_nhom.text()
+            # maMon = self.uic.input_maMon.text()
+            # nhom = self.uic.input_nhom.text()
             anh_user = ""
             try:
                 anh_user = link_name_user_pic[0]
@@ -64,23 +66,38 @@ class MainWindow:
                     Code128(barCodeMssv, writer=ImageWriter()).write(f)
                 # hien thi ma vach
                 self.uic.label_barCode.setPixmap(QPixmap("E:\\CTU\\HK2_nam_4_2023-2024\\NLMMT\\Users\\"+barCodeMssv+".png"))
+                
                 mycursor = mydb.cursor()
-                # sql_sinh_vien = "INSERT INTO `sinh_vien`(`ma_so_sinh_vien`, `ho_ten`, `email`, `gioi_tinh`, `so_dien_thoai`, `anh_sinh_vien`) VALUES (%s,%s,%s,%s,%s,%s)"
-                # val_sinh_vien = (maSo, name, email, gioiTinh, soDienThoai, anh_user  )
-                # mycursor.execute(sql_sinh_vien, val_sinh_vien)
-                # mydb.commit()
+                sql_sinh_vien = "INSERT INTO `sinh_vien`(`ma_so_sinh_vien`, `ho_ten`, `email`, `gioi_tinh`, `so_dien_thoai`, `anh_sinh_vien`) VALUES (%s,%s,%s,%s,%s,%s)"
+                val_sinh_vien = (maSo, name, email, gioiTinh, soDienThoai, anh_user  )
+                mycursor.execute(sql_sinh_vien, val_sinh_vien)
+                mydb.commit()
                
-                sql_mon_hoc = "INSERT INTO `mon_hoc`(`ma_mon`, `nhom`) VALUES (%s,%s)"
-                val_mon_hoc = (maMon, nhom)
-                mycursor.execute(sql_mon_hoc, val_mon_hoc)
-                mydb.commit()
 
-                sql_mon_hoc = "INSERT INTO `dang_ky_mon_hoc`(`ma_so_sinh_vien`, `ma_mon`) VALUES (%s,%s)"
-                val_mon_hoc = (maSo, maMon)
-                mycursor.execute(sql_mon_hoc, val_mon_hoc)
-                mydb.commit()
                 print(mycursor.rowcount, "record inserted.")
+    def dangKyHocPhan(self):
+        try:
+            mssv_dkhp = self.uic.input_mssv_dkhp.text()
+            ma_hocPhan = self.uic.input_ma_hocPhan.text()
+            nhom = self.uic.input_nhom_hocPhan.text()
+        
+            mycursor = mydb.cursor()
+            # sql_mon_hoc = "INSERT INTO `mon_hoc`(`ma_mon`, `nhom`) VALUES (%s,%s)"
+            # val_mon_hoc = (ma_hocPhan, nhom)
+            # mycursor.execute(sql_mon_hoc, val_mon_hoc)
+            # mydb.commit()
 
+            sql_DK_mon_hoc = "INSERT INTO `dang_ky_mon_hoc`(`mssv`, `ma_mon`, `nhom`) VALUES (%s,%s,%s)"
+            val_DK_mon_hoc = (mssv_dkhp, ma_hocPhan, nhom)
+            mycursor.execute(sql_DK_mon_hoc, val_DK_mon_hoc)
+            mydb.commit()
+            msg = QMessageBox()
+            msg.setText("Đăng ký thành công")
+            msg.exec_()
+        except:
+            msg = QMessageBox()
+            msg.setText("Đăng ký thất bại")
+            msg.exec_()
     def clear_input(self):
         self.uic.label_user.setPixmap(QPixmap("E:\\CTU\\HK2_nam_4_2023-2024\\NLMMT\\img\\pic_user.png"))
         self.uic.label_barCode.setPixmap(QPixmap(""))
@@ -88,8 +105,6 @@ class MainWindow:
         self.uic.input_maSo.setText('') 
         self.uic.input_phone.setText('') 
         self.uic.input_email.setText('') 
-        self.uic.input_maMon.setText('')
-        self.uic.input_nhom.setText('')
         self.uic.label_barCode.setText('Mã vạch')
 
     
@@ -132,20 +147,20 @@ class MainWindow:
         else:
             message+= ('Email không hợp lệ\n') 
         
-        if len(str(self.uic.input_maMon.text()))==5:
-            count+=1
-        else:
-            message+= ('Mã môn chưa hợp lệ\n')
+        # if len(str(self.uic.input_maMon.text()))==5:
+        #     count+=1
+        # else:
+        #     message+= ('Mã môn chưa hợp lệ\n')
 
-        if self.uic.input_nhom.text().isnumeric() :
-            count+=1
-        else:
-            message+= ('Nhóm chưa hợp lệ\n') 
+        # if self.uic.input_nhom.text().isnumeric() :
+        #     count+=1
+        # else:
+        #     message+= ('Nhóm chưa hợp lệ\n') 
 
        
-        if(count<6):
+        if(count<4):
             msg = QMessageBox()
-            message+=('Vui lòng nhập lại!!!\n')
+            message+=('Vui lòng kiểm tra thông tin!\n')
             msg.setText(message)
             msg.exec_()
         

@@ -115,8 +115,13 @@
             <x>30</x>
             <y>380</y>
             <width>391</width>
-            <height>151</height>
+            <height>191</height>
            </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <layout class="QFormLayout" name="formLayout">
            <item row="0" column="0">
@@ -233,6 +238,33 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_tuan">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Tuần</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="input_tuan">
+             <property name="maximumSize">
+              <size>
+               <width>260</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
           </layout>
          </widget>
          <widget class="QPushButton" name="btn_closeCam">
@@ -256,9 +288,9 @@
          <widget class="QPushButton" name="btn_export_file">
           <property name="geometry">
            <rect>
-            <x>510</x>
-            <y>380</y>
-            <width>131</width>
+            <x>480</x>
+            <y>550</y>
+            <width>191</width>
             <height>51</height>
            </rect>
           </property>
@@ -271,6 +303,42 @@
            <string>Xuất file excel</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="btn_tim_danhSach">
+          <property name="geometry">
+           <rect>
+            <x>480</x>
+            <y>410</y>
+            <width>191</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lấy danh sách lớp</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="btn_luu_danh_sach">
+          <property name="geometry">
+           <rect>
+            <x>480</x>
+            <y>480</y>
+            <width>191</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lưu danh sách lớp</string>
+          </property>
+         </widget>
         </widget>
        </item>
        <item>
@@ -281,9 +349,9 @@
          <widget class="QTableWidget" name="bang_danh_sach">
           <property name="geometry">
            <rect>
-            <x>270</x>
+            <x>50</x>
             <y>20</y>
-            <width>301</width>
+            <width>711</width>
             <height>621</height>
            </rect>
           </property>
@@ -300,7 +368,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Điểm danh</string>
+            <string>Ngày</string>
            </property>
           </column>
          </widget>
