@@ -48,9 +48,28 @@
            <rect>
             <x>150</x>
             <y>20</y>
-            <width>151</width>
+            <width>211</width>
             <height>51</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+#btn_page_dangky {
+    background-color: #4d4dff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_page_dangky:hover {
+    background-color: #6666ff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
           </property>
           <property name="text">
            <string>Đăng ký mã vạch</string>
@@ -59,11 +78,30 @@
          <widget class="QPushButton" name="btn_page_quanly">
           <property name="geometry">
            <rect>
-            <x>350</x>
+            <x>400</x>
             <y>20</y>
-            <width>161</width>
+            <width>221</width>
             <height>51</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+#btn_page_quanly {
+    background-color: #4d4dff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_page_quanly:hover {
+    background-color: #6666ff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
           </property>
           <property name="text">
            <string>Quản Lý Điểm Danh</string>
@@ -120,16 +158,34 @@
          <widget class="QPushButton" name="btn_openCam">
           <property name="geometry">
            <rect>
-            <x>490</x>
+            <x>480</x>
             <y>30</y>
-            <width>131</width>
+            <width>151</width>
             <height>51</height>
            </rect>
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>-1</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#btn_openCam {
+    background-color: #1a75ff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_openCam:hover {
+    background-color: #4d94ff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
           </property>
           <property name="text">
            <string>Mở Camera </string>
@@ -140,14 +196,32 @@
            <rect>
             <x>640</x>
             <y>30</y>
-            <width>131</width>
+            <width>141</width>
             <height>51</height>
            </rect>
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
+            <pointsize>-1</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#btn_closeCam {
+    background-color: #ff6666; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 18px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_closeCam:hover {
+    background-color: #ff4d4d; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
           </property>
           <property name="text">
            <string>Tắt Camera </string>
@@ -158,7 +232,7 @@
            <rect>
             <x>20</x>
             <y>500</y>
-            <width>751</width>
+            <width>761</width>
             <height>151</height>
            </rect>
           </property>
@@ -261,16 +335,34 @@
           <widget class="QPushButton" name="btn_tim_danhSach">
            <property name="geometry">
             <rect>
-             <x>430</x>
+             <x>410</x>
              <y>30</y>
-             <width>151</width>
+             <width>181</width>
              <height>51</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>-1</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#btn_tim_danhSach {
+    background-color: #1a75ff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_tim_danhSach:hover {
+    background-color: #4d94ff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
            </property>
            <property name="text">
             <string>Lấy danh sách</string>
@@ -279,19 +371,37 @@
           <widget class="QPushButton" name="btn_luu_danh_sach">
            <property name="geometry">
             <rect>
-             <x>430</x>
+             <x>410</x>
              <y>90</y>
-             <width>151</width>
+             <width>181</width>
              <height>51</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>-1</pointsize>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">#btn_luu_danh_sach {
+    background-color: #1a75ff; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_luu_danh_sach:hover {
+    background-color: #4d94ff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
+           </property>
            <property name="text">
-            <string>Lưu danh sách lớp</string>
+            <string>Lưu danh sách</string>
            </property>
           </widget>
           <widget class="QPushButton" name="btn_export_file">
@@ -299,14 +409,32 @@
             <rect>
              <x>600</x>
              <y>30</y>
-             <width>131</width>
+             <width>151</width>
              <height>51</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>-1</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#btn_export_file {
+    background-color: #00b300; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 18px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_export_file:hover {
+    background-color: #00cc00; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
            </property>
            <property name="text">
             <string>Xuất file excel</string>
@@ -317,14 +445,32 @@
             <rect>
              <x>600</x>
              <y>90</y>
-             <width>131</width>
+             <width>151</width>
              <height>51</height>
             </rect>
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>-1</pointsize>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#btn_clear_input {
+    background-color: #ff6666; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: 1px solid #ff6666; /* Viền */
+    border-radius: 4px; /* Viền tròn */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    font-size: 20px; /* Cỡ chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
+}
+
+#btn_clear_input:hover {
+    background-color: #ff4d4d; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+}
+</string>
            </property>
            <property name="text">
             <string>Làm mới</string>

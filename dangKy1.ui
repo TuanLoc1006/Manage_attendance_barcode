@@ -53,7 +53,7 @@
         <property name="styleSheet">
          <string notr="true">
 #btn_page_dangky {
-    background-color: #1a75ff; /* Màu nền */
+    background-color: #4d4dff; /* Màu nền */
     color: white; /* Màu chữ */
     border: 1px solid #ff6666; /* Viền */
     border-radius: 4px; /* Viền tròn */
@@ -64,7 +64,7 @@
 }
 
 #btn_page_dangky:hover {
-    background-color: #4d94ff; /* Màu nền khi hover */
+    background-color: #6666ff; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
 </string>
@@ -85,7 +85,7 @@
         <property name="styleSheet">
          <string notr="true">
 #btn_page_quanly {
-    background-color: #1a75ff; /* Màu nền */
+    background-color: #4d4dff; /* Màu nền */
     color: white; /* Màu chữ */
     border: 1px solid #ff6666; /* Viền */
     border-radius: 4px; /* Viền tròn */
@@ -96,7 +96,7 @@
 }
 
 #btn_page_quanly:hover {
-    background-color: #4d94ff; /* Màu nền khi hover */
+    background-color: #6666ff; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
 </string>
@@ -128,7 +128,7 @@
         </property>
         <property name="styleSheet">
          <string notr="true">#btn_imgUser {
-    background-color: #ff6666; /* Màu nền */
+    background-color: #1a75ff; /* Màu nền */
     color: white; /* Màu chữ */
     border: 1px solid #ff6666; /* Viền */
     border-radius: 4px; /* Viền tròn */
@@ -139,7 +139,7 @@
 }
 
 #btn_imgUser:hover {
-    background-color: #ff4d4d; /* Màu nền khi hover */
+    background-color: #4d94ff; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
 </string>
@@ -331,7 +331,7 @@
         <property name="styleSheet">
          <string notr="true">
 #btn_luuThongTin {
-    background-color: #ff6666; /* Màu nền */
+    background-color: #1a75ff; /* Màu nền */
     color: white; /* Màu chữ */
     border: 1px solid #ff6666; /* Viền */
     border-radius: 4px; /* Viền tròn */
@@ -342,7 +342,7 @@
 }
 
 #btn_luuThongTin:hover {
-    background-color: #ff4d4d; /* Màu nền khi hover */
+    background-color: #4d94ff; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
 </string>
@@ -523,7 +523,7 @@
         <property name="styleSheet">
          <string notr="true">
 #btn_dangKyHocPhan {
-    background-color: #ff6666; /* Màu nền */
+    background-color: #1a75ff; /* Màu nền */
     color: white; /* Màu chữ */
     border: 1px solid #ff6666; /* Viền */
     border-radius: 4px; /* Viền tròn */
@@ -534,7 +534,7 @@
 }
 
 #btn_dangKyHocPhan:hover {
-    background-color: #ff4d4d; /* Màu nền khi hover */
+    background-color: #4d94ff; /* Màu nền khi hover */
     color: #fff; /* Màu chữ khi hover */
 }
 </string>
